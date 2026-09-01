@@ -3,238 +3,535 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>個人訓練計畫 - 身體分析 & 訓練菜單</title>
+    <title>訓練菜單 - 功能性訓練計畫</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Microsoft JhengHei', Arial, sans-serif; background: #f5f5f5; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        h1 { color: #333; margin-bottom: 30px; text-align: center; font-size: 28px; }
-        h2 { color: #2c3e50; margin-top: 30px; margin-bottom: 15px; font-size: 22px; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
-        h3 { color: #34495e; margin-top: 20px; margin-bottom: 10px; font-size: 16px; }
-        .section { margin-bottom: 25px; }
-        .info-box { background: #ecf0f1; padding: 15px; border-left: 4px solid #3498db; margin-bottom: 15px; border-radius: 4px; }
-        .info-box p { margin: 8px 0; line-height: 1.6; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; }
-        th { background: #3498db; color: white; font-weight: bold; }
-        tr:nth-child(even) { background: #f9f9f9; }
-        tr:hover { background: #f0f0f0; }
-        .exercise-name { font-weight: 600; color: #2c3e50; }
-        .input-cell { background: #fffacd; }
-        ul { margin-left: 20px; line-height: 1.8; }
-        li { margin-bottom: 8px; }
-        .footer { margin-top: 40px; text-align: center; color: #7f8c8d; font-size: 12px; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>📋 個人訓練計畫</h1>
-
-        <!-- 身體分析 -->
-        <h2>身體分析</h2>
-        <div class="section">
-            <h3>基本數據</h3>
-            <div class="info-box">
-                <p><strong>年齡：</strong>33 歲</p>
-                <p><strong>性別：</strong>女性</p>
-                <p><strong>身高：</strong>162 cm</p>
-                <p><strong>體重：</strong>65 kg</p>
-                <p><strong>體脂率：</strong>約 28-30%</p>
-                <p><strong>訓練經驗：</strong>2 年（規律健身房訓練）</p>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            font-size: 22px;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .body-analysis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .analysis-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .analysis-card .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .analysis-card .value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .core-issues {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .core-issues h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .core-issues ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .core-issues li {
+            padding: 8px 0-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        
+        .workout-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .day-icon {
+            font-size: 24px;
+        }
+        
+        .exercise-group {
+            margin-bottom: 20px;
+        }
+        
+        .exercise-group h4 {
+            color: #667eea;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #667eea;
+        }
+        
+        .exercise {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .exercise-name {
+            flex: 1;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .exercise-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            gap: 8px;
+            text-align: center;
+        }肢肌肉不對稱（左側背闊肌較弱）</li>
+                        <li>引體向上能力（目標：3 個無輔助）</li>
+                        <li>腳趾骨折恢復中</li>
+                        <li>核心穩定性需加強</li>
+                    </ul>
+                </div>
             </div>
-
-            <h3>主要目標</h3>
-            <ul>
-                <li>完成 3 個無輔助引體向上</li>
-                <li>增加肌肉量、減少體脂</li>
-                <li>提升身體定義感</li>
-                <li>改善肌肉不對稱（左側背闊肌較弱）</li>
-                <li>增強功能性力量</li>
-            </ul>
-
-            <h3>核心議題</h3>
-            <ul>
-                <li><strong>上肢肌肉不對稱：</strong>左側背闊肌與上背較弱，影響拉力動作穩定性</li>
-                <li><strong>引體向上能力：</strong>目前可完成 2 個無輔助引體向上，需進階訓練達 3 個</li>
-                <li><strong>腳趾骨折恢復：</strong>近期恢復，需謹慎進行下肢爆發力動作</li>
-                <li><strong>核心穩定性：</strong>需加強腹部與腰部穩定度，支持複合動作表現</li>
-            </ul>
-
-            <h3>訓練分配策略</h3>
-            <div class="info-box">
-                <p><strong>每週訓練 3 天，採三分化訓練法：</strong></p>
-                <ul style="margin-top: 10px;">
-                    <li>第 1 天 - 背日（引體向上優先）</li>
-                    <li>第 2 天 - 腿日（下肢力量與穩定性）</li>
-                    <li>第 3 天 - 胸部 + 小肌群日（上肢推力與細節雕塑）</li>
-                </ul>
+            
+            <!-- 訓練菜單部分 -->
+            <div class="section">
+                <h2>📋 詳細訓練菜單</h2>
+                
+                <!-- 第一天：背日 -->
+                <div class="workout-card">
+                    <h3><span class="day-icon">🔙</span> 第 1 天：背日（引體向上優先）</h3>
+                    
+                    <div class="exercise-group">
+                        <h4>主要訓練</h4>
+                        <div class="exercise">
+                            <div class="exercise-name">1. 引體向上</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item" style="background: #fff9e6;">
+                                    <input type="text" placeholder="-">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="6-8">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="5">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">2. 輔助引體向上加強</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="8-10">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-group">
+                        <h4>副訓練</h4>
+                        <div class="exercise">
+                            <div class="exercise-name">3. 單臂划船（左側優先）</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="4">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">4. 槓鈴划船</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="8-10">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="4">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">5. X 拉下</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">6. 背部卷縮（腳固定）</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="自重">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="12-15">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第二天：腿日 -->
+                <div class="workout-card">
+                    <h3><span class="day-icon">🦵</span> 第 2 天：腿日（下肢力量與穩定性）</h3>
+                    
+                    <div class="exercise-group">
+                        <h4>主要訓練</h4>
+                        <div class="exercise">
+                            <div class="exercise-name">1. 前蹲舉</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item" style="background: #fff9e6;">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="6-8">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="4">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-group">
+                        <h4>副訓練</h4>
+                        <div class="exercise">
+                            <div class="exercise-name">2. 保加利亞分腿蹲</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">3. 坐姿腿彎舉</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">4. 腿部推舉</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">5. 腿部延伸（股四頭肌）</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="12-15">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">6. 站姿提踵（小腿）</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="15-20">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 第三天：胸部 + 小肌群日 -->
+                <div class="workout-card">
+                    <h3><span class="day-icon">💪</span> 第 3 天：胸部 + 小肌群日（上肢推力與細節雕塑）</h3>
+                    
+                    <div class="exercise-group">
+                        <h4>主要訓練</h4>
+                        <div class="exercise">
+                            <div class="exercise-name">1. 槓鈴臥推</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item" style="background: #fff9e6;">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="6-8">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="4">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">2. 啞鈴臥推（斜板）</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="8-10">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="4">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-group">
+                        <h4>副訓練</h4>
+                        <div class="exercise">
+                            <div class="exercise-name">3. 雙頭肌彎舉</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">4. 槓鈴頸後三頭肌伸展</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">5. 站姿肩推</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="10-12">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <div class="exercise-name">6. 側平舉</div>
+                            <div class="exercise-specs">
+                                <div class="spec-item">
+                                    <input type="text" placeholder="">
+                                    <div class="spec-label">重量</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="12-15">
+                                    <div class="spec-label">次數</div>
+                                </div>
+                                <div class="spec-item">
+                                    <input type="text" placeholder="3">
+                                    <div class="spec-label">組數</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <!-- 詳細訓練菜單 -->
-        <h2>詳細訓練菜單</h2>
-
-        <!-- 第一天：背日 -->
-        <div class="section">
-            <h3>第 1 天：背日（引體向上優先）</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 35%;">動作</th>
-                        <th style="width: 20%;">重量</th>
-                        <th style="width: 20%;">次數</th>
-                        <th style="width: 25%;">組數</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="exercise-name">1. 引體向上</td>
-                        <td class="input-cell">-</td>
-                        <td class="input-cell">6-8</td>
-                        <td class="input-cell">5</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">2. 輔助引體向上加強</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">8-10</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">3. 單臂划船（左側優先）</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">4</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">4. 槓鈴划船</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">8-10</td>
-                        <td class="input-cell">4</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">5. X 拉下</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">6. 背部卷縮（腳固定）</td>
-                        <td class="input-cell">自重</td>
-                        <td class="input-cell">12-15</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 第二天：腿日 -->
-        <div class="section">
-            <h3>第 2 天：腿日（下肢力量與穩定性）</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 35%;">動作</th>
-                        <th style="width: 20%;">重量</th>
-                        <th style="width: 20%;">次數</th>
-                        <th style="width: 25%;">組數</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="exercise-name">1. 前蹲舉</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">6-8</td>
-                        <td class="input-cell">4</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">2. 保加利亞分腿蹲</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">3. 坐姿腿彎舉</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">4. 腿部推舉</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">5. 腿部延伸（股四頭肌）</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">12-15</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">6. 站姿提踵（小腿）</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">15-20</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- 第三天：胸部 + 小肌群日 -->
-        <div class="section">
-            <h3>第 3 天：胸部 + 小肌群日（上肢推力與細節雕塑）</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 35%;">動作</th>
-                        <th style="width: 20%;">重量</th>
-                        <th style="width: 20%;">次數</th>
-                        <th style="width: 25%;">組數</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="exercise-name">1. 槓鈴臥推</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">6-8</td>
-                        <td class="input-cell">4</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">2. 啞鈴臥推（斜板）</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">8-10</td>
-                        <td class="input-cell">4</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">3. 雙頭肌彎舉</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">4. 槓鈴頸後三頭肌伸展</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">5. 站姿肩推</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">10-12</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                    <tr>
-                        <td class="exercise-name">6. 側平舉</td>
-                        <td class="input-cell"></td>
-                        <td class="input-cell">12-15</td>
-                        <td class="input-cell">3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="footer">
-            <p>此訓練計畫已根據個人目標、能力與反饋進行調整。定期評估進度並根據需要調整重量與次數。</p>
         </div>
     </div>
 </body>
@@ -632,4 +929,3 @@
     </div>
 </body>
 </html>
-
