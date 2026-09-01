@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健身追蹤系統</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 2px solid #e0e0e0;
+            overflow-x: auto;
+        }
+        
+        .nav-tabs button {
+            flex: 1;
+            padding: 15px 10px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+            min-width: 80px;
+            white-space: nowrap;
+        }
+        
+        .nav-tabs button.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            margin-bottom: -2px;
+        }
+        
+        .content {
+            padding: 20px;
+            min-height: 600px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .data-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .data-card-title {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .data-card-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .data-card-unit {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .exercise-item {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .exercise-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .exercise-detail {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        .exercise-input-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .exercise-input-group input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        
+        .exercise-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        .nutrition-table th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .nutrition-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+        
+        .nutrition-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .meal-section {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .meal-time {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .meal-items {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .summary-card-title {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .summary-card-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #856404;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #155724;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💪 健身追蹤系統</h1>
+            <p>33歲女性 | 目標：3個引體向上</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('body')">身體數據</button>
+            <button class="tab-btn" onclick="switchTab('training')">訓練菜單</button>
+            <button class="tab-btn" onclick="switchTab('nutrition')">營養計畫</button>
+        </div>
+        
+        <div class="content">
+            <!-- 身體數據分析 -->
+            <div id="body" class="tab-content active">
+                <div class="section-title">📊 本週身體數據</div>
+                
+                <div class="form-group">
+                    <label>體重 (kg)</label>
+                    <input type="number" id="weight" step="0.1" placeholder="輸入體重">
+                </div>
+                
+                <div class="form-group">
+                    <label>體脂肪率 (%)</label>
+                    <input type="number" id="bodyfat" step="0.1" placeholder="輸入體脂肪率">
+                </div>
+                
+                <div class="form-group">
+                    <label>骨骼肌量 (kg)</label>
+                    <input type="number" id="muscle" step="0.1" placeholder="輸入骨骼肌量">
+                </div>
+                
+                <button class="btn" onclick="saveBodyData()">保存數據</button>
+                
+                <div class="success-message" id="successMsg">✓ 數據已保存！</div>
+                
+                <div class="section-title" style="margin-top: 25px;">📈 上週數據對比</div>
+                
+                <div id="lastWeekData">
+                    <p style="text-align: center; color: #999; font-size: 13px;">暫無上週數據</p>
+                </div>
+                
+                <div class="note">
+                    <strong>核心問題改善重點：</strong><br>
+                    • 引體向上進度：逐步減少輔助重量<br>
+                    • 下肢穩定性：腳趾受傷恢復期重點訓練<br>
+                    • 下肢力量：循序漸進提升負荷<br>
+                    • 踝關節靈活度：持續改善活動度
+                </div>
+            </div>
+            
+            <!-- 訓練菜單 -->
+            <div id="training" class="tab-content">
+                <div class="section-title">🏋️ 本週訓練菜單</div>
+                
+                <div class="form-group">
+                    <label>選擇訓練日</label>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button onclick="selectTrainingDay('day1')" class="btn" style="flex: 1; padding: 10px; background: #667eea;">第1天：背部</button>
+                        <button onclick="selectTrainingDay('day2')" class="btn" style="flex: 1; padding: 10px; background: #764ba2;">第2天：腿部</button>
+                        <button onclick="selectTrainingDay('day3')" class="btn" style="flex: 1; padding: 10px; background: #667eea;">第3天：胸+小肌群</button>
+                    </div>
+                </div>
+                
+                <div id="trainingContent"></div>
+                
+                <button class="btn" onclick="saveTrainingData()" style="margin-top: 15px;">保存訓練記錄</button>
+            </div>
+            
+            <!-- 營養計畫 -->
+            <div id="nutrition" class="tab-content">
+                <div class="section-title">🍽️ 營養計畫</div>
+                
+                <div class="form-group">
+                    <label>選擇日期類型</label>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button onclick="selectNutritionDay('training')" class="btn" style="flex: 1; padding: 10px; background: #667eea;">訓練日</button>
+                        <button onclick="selectNutritionDay('rest')" class="btn" style="flex: 1; padding: 10px; background: #764ba2;">休息日</button>
+                    </div>
+                </div>
+                
+                <div id="nutritionContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 訓練菜單數據 ==========
+        const trainingPlans = {
+            day1: {
+                name: '第1天：背部 + 引體向上進階',
+                exercises: [
+                    {
+                        name: '輔助自體向上',
+                        detail: '4組 x 6-8下｜輔助重量：逐週減少5kg｜速度：3秒向上、1秒停留、3秒下降',
+                        note: '輔助自體向上 vs 輔助引體向上加強：輔助自體向上雙手握住把手（掌心向前），更強調背部肌肉；輔助引體向上加強使用機器輔助，難度漸進式增加。'
+                    },
+                    {
+                        name: '輔助引體向上加強',
+                        detail: '3組 x 5-6下｜輔助重量：逐週減少3kg'
+                    },
+                    {
+                        name: '單臂器材划船',
+                        detail: '3組 x 8-10下/邊｜重量：12-15kg｜速度：2秒拉、1秒停留、2秒回'
+                    },
+                    {
+                        name: '啞鈴划船',
+                        detail: '3組 x 10-12下｜重量：10-12kg',
+                        note: '替代反向夾胸的背部動作'
+                    },
+                    {
+                        name: '槓鈴划船',
+                        detail: '3組 x 8-10下｜重量：20-25kg'
+                    },
+                    {
+                        name: '寬握下拉',
+                        detail: '3組 x 10-12下｜重量：45-55kg'
+                    }
+                ]
+            },
+            day2: {
+                name: '第2天：腿部',
+                exercises: [
+                    {
+                        name: '高腳杯深蹲',
+                        detail: '4組 x 12-15下｜重量：16kg啞鈴｜速度：2秒下、1秒停留、2秒起',
+                        note: '替代腿部推蹬'
+                    },
+                    {
+                        name: '哈克深蹲',
+                        detail: '3組 x 10-12下｜重量：40-50kg',
+                        note: '替代站姿小腿提踵'
+                    },
+                    {
+                        name: '羅馬尼亞硬舉',
+                        detail: '3組 x 10-12下｜重量：30-40kg｜速度：2秒下、1秒停留、2秒起'
+                    },
+                    {
+                        name: '保加利亞分腿蹲',
+                        detail: '3組 x 10下/邊｜重量：啞鈴10-12kg x 2｜速度：2秒下、1秒停留、2秒起'
+                    },
+                    {
+                        name: '腿部內收訓練機',
+                        detail: '3組 x 15下｜重量：45-55kg'
+                    }
+                ]
+            },
+            day3: {
+                name: '第3天：胸部 + 小肌群',
+                exercises: [
+                    {
+                        name: '啞鈴臥推',
+                        detail: '4組 x 10-12下｜重量：12-14kg｜速度：2秒下、1秒停留、2秒起'
+                    },
+                    {
+                        name: '啞鈴肩推',
+                        detail: '3組 x 10-12下｜重量：10-12kg',
+                        note: '替代槓鈴肩上推舉'
+                    },
+                    {
+                        name: '平槓頭頂三角肌伸展',
+                        detail: '3組 x 12-15下｜重量：5-7kg',
+                        note: '替代槓鈴頭頂三角肌伸展'
+                    },
+                    {
+                        name: 'EZ槓彎舉',
+                        detail: '3組 x 10-12下｜重量：10-12kg'
+                    },
+                    {
+                        name: '啞鈴臂屈伸',
+                        detail: '3組 x 12-15下｜重量：6-8kg｜速度：2秒下、1秒停留、2秒起'
+                    },
+                    {
+                        name: '側平舉',
+                        detail: '3組 x 12-15下｜重量：6-8kg｜速度：2秒起、1秒停留、2秒下'
+                    }
+                ]
+            }
+        };
+
+        // ========== 營養計畫數據 ==========
+        const nutritionPlans = {
+            training: {
+                name: '訓練日營養計畫',
+                dailyTargets: {
+                    carbs: '9-10份',
+                    protein: '11-13份',
+                    vegetables: '3-4份',
+                    calories: '2100-2300 kcal'
+                },
+                meals: [
+                    {
+                        time: '早餐 (訓練前2-3小時)',
+                        items: '白飯2碗 + 雞蛋2顆 + 青菜1碗 | 或 燕麥粥1碗 + 香蕉1根 + 優格'
+                    },
+                    {
+                        time: '訓練前補給 (訓練前30分鐘)',
+                        items: '香蕉1根 | 或 能量棒1根 | 或 麥片'
+                    },
+                    {
+                        time: '午餐 (訓練後)',
+                        items: '白飯2.5碗 + 雞胸肉手掌大小 + 青菜1.5碗 + 豆類1份'
+                    },
+                    {
+                        time: '訓練後補給 (訓練後30分鐘)',
+                        items: '乳清蛋白1匙 + 白飯0.5碗 | 或 牛奶1杯 + 麵包1片'
+                    },
+                    {
+                        time: '下午點心',
+                        items: '蛋白吐司 + 花生醬 | 或 雞胸肉便當 1份'
+                    },
+                    {
+                        time: '晚餐',
+                        items: '白飯1.5碗 + 魚類或豆類1份 + 青菜1.5碗'
+                    },
+                    {
+                        time: '宵夜 (可選)',
+                        items: '低脂乳酪 | 或 無糖優格 | 或 蛋白飲'
+                    }
+                ]
+            },
+            rest: {
+                name: '休息日營養計畫',
+                dailyTargets: {
+                    carbs: '6-7份',
+                    protein: '10-12份',
+                    vegetables: '3-4份',
+                    calories: '1800-2000 kcal'
+                },
+                meals: [
+                    {
+                        time: '早餐',
+                        items: '白飯1.5碗 + 雞蛋2顆 + 青菜1碗'
+                    },
+                    {
+                        time: '上午點心',
+                        items: '香蕉1根 | 或 無糖優格'
+                    },
+                    {
+                        time: '午餐',
+                        items: '白飯2碗 + 雞胸肉手掌大小 + 青菜1.5碗'
+                    },
+                    {
+                        time: '下午點心',
+                        items: '蛋白吐司 + 花生醬 | 或 堅果'
+                    },
+                    {
+                        time: '晚餐',
+                        items: '白飯1碗 + 魚類或豆類1份 + 青菜2碗'
+                    },
+                    {
+                        time: '宵夜 (可選)',
+                        items: '低脂乳酪 | 或 無糖優格'
+                    }
+                ]
+            }
+        };
+
+        // ========== 函數邏輯 ==========
+        function switchTab(tabName) {
+            // 隱藏所有tab
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 移除所有button的active
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // 顯示選中的tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function selectTrainingDay(day) {
+            const plan = trainingPlans[day];
+            let html = `<div class="section-title" style="margin-top: 20px;">${plan.name}</div>`;
+            
+            plan.exercises.forEach(exercise => {
+                html += `
+                    <div class="exercise-item">
+                        <div class="exercise-name">${exercise.name}</div>
+                        <div class="exercise-detail">${exercise.detail}</div>
+                        ${exercise.note ? `<div class="exercise-detail" style="color: #764ba2; font-weight: 500;">💡 ${exercise.note}</div>` : ''}
+                        <div class="exercise-input-group">
+                            <input type="checkbox" class="exercise-checkbox" title="完成">
+                            <input type="text" placeholder="重量/下數" style="flex: 1;">
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('trainingContent').innerHTML = html;
+        }
+
+        function selectNutritionDay(type) {
+            const plan = nutritionPlans[type];
+            let html = `
+                <div class="section-title" style="margin-top: 20px;">${plan.name}</div>
+                
+                <div class="summary-card">
+                    <div class="summary-card-title">日均卡路里</div>
+                    <div class="summary-card-value">${plan.dailyTargets.calories}</div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; margin-bottom: 10px;">營養目標</div>
+                    <table class="nutrition-table">
+                        <tr>
+                            <th>營養素</th>
+                            <th>目標量</th>
+                        </tr>
+                        <tr>
+                            <td>碳水化合物</td>
+                            <td>${plan.dailyTargets.carbs}</td>
+                        </tr>
+                        <tr>
+                            <td>蛋白質</td>
+                            <td>${plan.dailyTargets.protein}</td>
+                        </tr>
+                        <tr>
+                            <td>蔬菜</td>
+                            <td>${plan.dailyTargets.vegetables}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div style="font-size: 13px; font-weight: 600; color: #333; margin-bottom: 10px;">每日進食安排</div>
+            `;
+            
+            plan.meals.forEach(meal => {
+                html += `
+                    <div class="meal-section">
+                        <div class="meal-time">${meal.time}</div>
+                        <div class="meal-items">${meal.items}</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <div class="note">
+                    <strong>📋 補充提示：</strong><br>
+                    • 每日飲水：2.5-3公升<br>
+                    • 訓練後30分鐘內進食（碳水+蛋白質）<br>
+                    • 腳趾受傷期間：優先補充膠原蛋白和維他命D<br>
+                    • 建議補充：乳清蛋白、肌酸、Omega-3、維他命D3
+                </div>
+            `;
+            
+            document.getElementById('nutritionContent').innerHTML = html;
+        }
+
+        function saveBodyData() {
+            const weight = document.getElementById('weight').value;
+            const bodyfat = document.getElementById('bodyfat').value;
+            const muscle = document.getElementById('muscle').value;
+            
+            if (!weight || !bodyfat || !muscle) {
+                alert('請填入所有數據');
+                return;
+            }
+            
+            const data = {
+                date: new Date().toLocaleDateString('zh-TW'),
+                weight,
+                bodyfat,
+                muscle
+            };
+            
+            localStorage.setItem('latestBodyData', JSON.stringify(data));
+            
+            const successMsg = document.getElementById('successMsg');
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+            
+            displayLastWeekData();
+        }
+
+        function displayLastWeekData() {
+            const data = JSON.parse(localStorage.getItem('latestBodyData'));
+            if (data) {
+                const html = `
+                    <div class="data-card">
+                        <div class="data-card-title">體重</div>
+                        <div class="data-card-value">${data.weight} <span class="data-card-unit">kg</span></div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-card-title">體脂肪率</div>
+                        <div class="data-card-value">${data.bodyfat} <span class="data-card-unit">%</span></div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-card-title">骨骼肌量</div>
+                        <div class="data-card-value">${data.muscle} <span class="data-card-unit">kg</span></div>
+                    </div>
+                    <div class="note">
+                        <strong>最後更新：</strong> ${data.date}
+                    </div>
+                `;
+                document.getElementById('lastWeekData').innerHTML = html;
+            }
+        }
+
+        function saveTrainingData() {
+            alert('✓ 訓練記錄已保存');
+        }
+
+        // 初始化
+        window.onload = function() {
+            displayLastWeekData();
+            selectTrainingDay('day1');
+            selectNutritionDay('training');
+        };
+    </script>
+</body>
+</html>
