@@ -1,931 +1,145 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>訓練菜單 - 功能性訓練計畫</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 30px 20px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section h2 {
-            font-size: 22px;
-            color: #667eea;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-        }
-        
-        .body-analysis {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .analysis-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .analysis-card .label {
-            font-size: 12px;
-            text-transform: uppercase;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-        
-        .analysis-card .value {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        
-        .core-issues {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        
-        .core-issues h3 {
-            color: #856404;
-            margin-bottom: 15px;
-        }
-        
-        .core-issues ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .core-issues li {
-            padding: 8px 0-card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-        }
-        
-        .workout-card h3 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .day-icon {
-            font-size: 24px;
-        }
-        
-        .exercise-group {
-            margin-bottom: 20px;
-        }
-        
-        .exercise-group h4 {
-            color: #667eea;
-            font-size: 14px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed #667eea;
-        }
-        
-        .exercise {
-            background: white;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .exercise-name {
-            flex: 1;
-            font-weight: 600;
-            color: #333;
-            font-size: 14px;
-        }
-        
-        .exercise-specs {
-            display: grid;
-            grid-template-columns: repeat(3, 60px);
-            gap: 8px;
-            text-align: center;
-        }肢肌肉不對稱（左側背闊肌較弱）</li>
-                        <li>引體向上能力（目標：3 個無輔助）</li>
-                        <li>腳趾骨折恢復中</li>
-                        <li>核心穩定性需加強</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- 訓練菜單部分 -->
-            <div class="section">
-                <h2>📋 詳細訓練菜單</h2>
-                
-                <!-- 第一天：背日 -->
-                <div class="workout-card">
-                    <h3><span class="day-icon">🔙</span> 第 1 天：背日（引體向上優先）</h3>
-                    
-                    <div class="exercise-group">
-                        <h4>主要訓練</h4>
-                        <div class="exercise">
-                            <div class="exercise-name">1. 引體向上</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item" style="background: #fff9e6;">
-                                    <input type="text" placeholder="-">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="6-8">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="5">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">2. 輔助引體向上加強</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="8-10">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="exercise-group">
-                        <h4>副訓練</h4>
-                        <div class="exercise">
-                            <div class="exercise-name">3. 單臂划船（左側優先）</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="4">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">4. 槓鈴划船</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="8-10">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="4">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">5. X 拉下</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">6. 背部卷縮（腳固定）</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="自重">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="12-15">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第二天：腿日 -->
-                <div class="workout-card">
-                    <h3><span class="day-icon">🦵</span> 第 2 天：腿日（下肢力量與穩定性）</h3>
-                    
-                    <div class="exercise-group">
-                        <h4>主要訓練</h4>
-                        <div class="exercise">
-                            <div class="exercise-name">1. 前蹲舉</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item" style="background: #fff9e6;">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="6-8">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="4">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="exercise-group">
-                        <h4>副訓練</h4>
-                        <div class="exercise">
-                            <div class="exercise-name">2. 保加利亞分腿蹲</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">3. 坐姿腿彎舉</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">4. 腿部推舉</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">5. 腿部延伸（股四頭肌）</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="12-15">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">6. 站姿提踵（小腿）</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="15-20">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 第三天：胸部 + 小肌群日 -->
-                <div class="workout-card">
-                    <h3><span class="day-icon">💪</span> 第 3 天：胸部 + 小肌群日（上肢推力與細節雕塑）</h3>
-                    
-                    <div class="exercise-group">
-                        <h4>主要訓練</h4>
-                        <div class="exercise">
-                            <div class="exercise-name">1. 槓鈴臥推</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item" style="background: #fff9e6;">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="6-8">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="4">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">2. 啞鈴臥推（斜板）</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="8-10">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="4">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="exercise-group">
-                        <h4>副訓練</h4>
-                        <div class="exercise">
-                            <div class="exercise-name">3. 雙頭肌彎舉</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">4. 槓鈴頸後三頭肌伸展</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">5. 站姿肩推</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="10-12">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise">
-                            <div class="exercise-name">6. 側平舉</div>
-                            <div class="exercise-specs">
-                                <div class="spec-item">
-                                    <input type="text" placeholder="">
-                                    <div class="spec-label">重量</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="12-15">
-                                    <div class="spec-label">次數</div>
-                                </div>
-                                <div class="spec-item">
-                                    <input type="text" placeholder="3">
-                                    <div class="spec-label">組數</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>營養計畫 - 增肌減脂目標</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 30px 20px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section h2 {
-            font-size: 22px;
-            color: #667eea;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-        }
-        
-        .day-card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-        
-        .day-card h3 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        
-        .macro-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .macro-box {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .macro-box .label {
-            font-size: 12px;
-            color: #999;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        
-        .macro-box .value {
-            font-size: 20px;
-            font-weight: bold;
-            color: #667eea;
-        }
-        
-        .meal-example {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .meal-example h4 {
-            color: #764ba2;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        
-        .meal-example p {
-            font-size: 13px;
-            line-height: 1.6;
-            color: #555;
-        }
-        
-        .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .info-box h4 {
-            color: #1976d2;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        
-        .info-box p {
-            font-size: 13px;
-            color: #555;
-            line-height: 1.6;
-        }
-        
-        .supplements-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-        }
-        
-        .supplement-item {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #667eea;
-            font-size: 13px;
-            color: #667eea;
-        }
-        
-        .footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #999;
-            font-size: 12px;
-        }
-        
-        @media (max-width: 600px) {
-            .content {
-                padding: 20px 15px;
-            }
-            
-            .header h1 {
-                font-size: 22px;
-            }
-            
-            .section h2 {
-                font-size: 18px;
-            }
-            
-            .macro-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>健身追蹤系統</title>
+<style>
+  * { box-sizing: border-box; }
+  body { background:#0a0a0a; color:#fff; font-family:"Microsoft JhengHei",sans-serif; margin:0; padding:0; }
+  .nav { display:flex; background:#000; border-bottom:3px solid #FFD700; }
+  .tab { flex:1; padding:16px; background:#1a1a1a; color:#FFD700; border:none; font-size:16px; font-weight:bold; cursor:pointer; border-right:1px solid #333; }
+  .tab.active { background:#FFD700; color:#000; }
+  .page { display:none; padding:20px; max-width:800px; margin:0 auto; }
+  .page.active { display:block; }
+  h2 { color:#FFD700; border-bottom:2px solid #FF3B30; padding-bottom:6px; }
+  input, select { background:#111; color:#fff; border:1px solid #FFD700; padding:8px; border-radius:4px; margin:4px 0; width:100%; }
+  label { font-size:14px; color:#ccc; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; }
+  .row > div { flex:1; min-width:100px; }
+  button.action { background:#FF3B30; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:10px; }
+  button.action:hover { background:#d92c22; }
+  table { width:100%; border-collapse:collapse; margin-top:15px; }
+  th, td { border:1px solid #FFD700; padding:8px; text-align:center; font-size:14px; }
+  th { background:#1a1a1a; color:#FFD700; }
+  .subtabs { display:flex; gap:8px; margin-bottom:15px; }
+  .subtab { flex:1; padding:10px; background:#1a1a1a; color:#fff; border:1px solid #FFD700; cursor:pointer; border-radius:4px; text-align:center; }
+  .subtab.active { background:#FF3B30; border-color:#FF3B30; }
+  .exercise-card { background:#161616; border:1px solid #FFD700; border-radius:8px; padding:14px; margin-bottom:12px; }
+  .exercise-card.done { border-color:#4CAF50; background:#0f1a0f; }
+  .ex-title { font-weight:bold; color:#FFD700; font-size:16px; }
+  .ex-target { color:#ccc; font-size:13px; margin-bottom:8px; }
+  .ex-inputs { display:flex; gap:8px; align-items:center; }
+  .ex-inputs input { width:70px; text-align:center; }
+  .checkbox-wrap { display:flex; align-items:center; gap:6px; margin-left:auto; }
+  .checkbox-wrap input { width:auto; }
+  .timer-box { text-align:center; background:#1a1a1a; border:2px solid #FF3B30; border-radius:10px; padding:15px; margin:15px 0; position:sticky; top:0; z-index:10; }
+  .timer-display { font-size:42px; color:#FF3B30; font-weight:bold; }
+  .nutri-box { background:#161616; border:1px solid #FFD700; border-radius:8px; padding:15px; margin-bottom:15px; }
+  .nutri-total { color:#FF3B30; font-weight:bold; font-size:18px; }
+  .food-table td { text-align:left; padding:6px; font-size:13px; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🥗 營養計畫</h1>
-            <p>增肌減脂 | 體重 65kg | 訓練 3 天/週</p>
-        </div>
-        
-        <div class="content">
-            <!-- 訓練日營養計畫 -->
-            <div class="section">
-                <h2>訓練日營養計畫</h2>
-                
-                <div class="day-card">
-                    <h3>📅 訓練日（背部日、腿部日、胸部日）</h3>
-                    
-                    <div class="macro-grid">
-                        <div class="macro-box">
-                            <div class="label">熱量目標</div>
-                            <div class="value">2100-2200</div>
-                            <div class="label">kcal</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">蛋白質</div>
-                            <div class="value">130-150</div>
-                            <div class="label">克</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">碳水化合物</div>
-                            <div class="value">10</div>
-                            <div class="label">份</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">脂肪</div>
-                            <div class="value">55-70</div>
-                            <div class="label">克</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">蔬菜</div>
-                            <div class="value">6-8</div>
-                            <div class="label">份</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">白飯</div>
-                            <div class="value">約 2.5</div>
-                            <div class="label">碗</div>
-                        </div>
-                    </div>
-                    
-                    <div class="meal-example">
-                        <h4>💡 碳水分配範例</h4>
-                        <p>
-                            • 白飯 2.5 碗 = 10 份碳水<br>
-                            或<br>
-                            • 白飯 2 碗（8 份）+ 香蕉 1 根（2 份）<br>
-                            或<br>
-                            • 白飯 2 碗（8 份）+ 燕麥粥 1 碗（2 份）<br>
-                            <br>
-                            <strong>其他碳水來源：</strong> 香蕉、燕麥、地瓜、麵食等
-                        </p>
-                    </div>
-                    
-                    <div class="meal-example">
-                        <h4>🍗 蛋白質分配範例</h4>
-                        <p>
-                            • 早餐：蛋白 2 顆 + 雞蛋 1 顆 + 燕麥 (30g 蛋白)<br>
-                            • 午餐：雞胸肉 200g + 白飯 (55g 蛋白)<br>
-                            • 訓練後：乳清蛋白粉 1 匙 + 香蕉 (25g 蛋白)<br>
-                            • 晚餐：牛肉 150g + 蔬菜 (40g 蛋白)<br>
-                            <br>
-                            <strong>總計：約 150g 蛋白</strong>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 休息日營養計畫 -->
-            <div class="section">
-                <h2>休息日營養計畫</h2>
-                
-                <div class="day-card">
-                    <h3>🏖️ 休息日（非訓練日）</h3>
-                    
-                    <div class="macro-grid">
-                        <div class="macro-box">
-                            <div class="label">熱量目標</div>
-                            <div class="value">1900-2000</div>
-                            <div class="label">kcal</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">蛋白質</div>
-                            <div class="value">130-150</div>
-                            <div class="label">克</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">碳水化合物</div>
-                            <div class="value">6</div>
-                            <div class="label">份</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">脂肪</div>
-                            <div class="value">55-70</div>
-                            <div class="label">克</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">蔬菜</div>
-                            <div class="value">6-8</div>
-                            <div class="label">份</div>
-                        </div>
-                        <div class="macro-box">
-                            <div class="label">白飯</div>
-                            <div class="value">約 1.5</div>
-                            <div class="label">碗</div>
-                        </div>
-                    </div>
-                    
-                    <div class="meal-example">
-                        <h4>💡 碳水分配範例</h4>
-                        <p>
-                            • 白飯 1.5 碗 = 6 份碳水<br>
-                            或<br>
-                            • 白飯 1 碗（4 份）+ 香蕉 1 根（2 份）<br>
-                            <br>
-                            <strong>提示：</strong> 休息日降低碳水攝取有助於減脂，蛋白質保持不變以維持肌肉
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 關鍵營養策略 -->
-            <div class="section">
-                <h2>🎯 關鍵營養策略</h2>
-                
-                <div class="info-box">
-                    <h4>水分補充</h4>
-                    <p>2.5-3L 水/天（根據訓練強度和季節調整）</p>
-                </div>
-                
-                <div class="info-box">
-                    <h4>訓練時機營養</h4>
-                    <p>
-                        <strong>訓練前 1-2 小時：</strong> 白飯 + 雞肉（易消化的碳水 + 蛋白）<br>
-                        <strong>訓練後 30-60 分鐘：</strong> 乳清蛋白粉 + 香蕉（快速吸收蛋白 + 碳水）
-                    </p>
-                </div>
-                
-                <div class="info-box">
-                    <h4>營養補充品</h4>
-                    <div class="supplements-list">
-                        <div class="supplement-item">乳清蛋白粉</div>
-                        <div class="supplement-item">肌酸</div>
-                        <div class="supplement-item">Omega-3</div>
-                        <div class="supplement-item">維生素D3</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 飲食建議 -->
-            <div class="section">
-                <h2>💬 飲食建議</h2>
-                
-                <div class="info-box">
-                    <h4>1. 蛋白質優先</h4>
-                    <p>每天 130-150g，分散在 4-5 餐中，每餐 30-40g，促進肌肉合成</p>
-                </div>
-                
-                <div class="info-box">
-                    <h4>2. 訓練日 vs 休息日的碳水差異</h4>
-                    <p>
-                        訓練日需要更多碳水（10 份）為高強度訓練提供能量<br>
-                        休息日碳水降低至 6 份，有助於減脂，但不會過度削減導致恢復不佳
-                    </p>
-                </div>
-                
-                <div class="info-box">
-                    <h4>3. 蔬菜 6-8 份</h4>
-                    <p>
-                        訓練日和休息日都保持 6-8 份蔬菜<br>
-                        提供微量營養素、纖維和飽足感，不影響碳水和脂肪目標
-                    </p>
-                </div>
-                
-                <div class="info-box">
-                    <h4>4. 脂肪 55-70g</h4>
-                    <p>
-                        穩定的脂肪攝取（無論訓練日或休息日）<br>
-                        來源：橄欖油、堅果、魚類、蛋黃，支持激素分泌和整體健康
-                    </p>
-                </div>
-                
-                <div class="info-box">
-                    <h4>5. 定期評估</h4>
-                    <p>
-                        每 2 週評估一次進度（與教練合作）<br>
-                        根據體重變化、肌肉定義和訓練表現調整營養計畫
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>🏋️ 營養計畫配合訓練菜單使用 | 如有疑問，請諮詢你的教練或營養師</p>
-        </div>
-    </div>
-</body>
-</html>
+
+<div class="nav">
+  <button class="tab active" onclick="showPage(1)">身體數據</button>
+  <button class="tab" onclick="showPage(2)">訓練菜單</button>
+  <button class="tab" onclick="showPage(3)">營養計畫</button>
+</div>
+
+<!-- 第一頁：身體數據 -->
+<div id="page1" class="page active">
+  <h2>每週身體數據追蹤</h2>
+  <div class="row">
+    <div><label>日期</label><input type="date" id="recDate"></div>
+    <div><label>體重 (kg)</label><input type="number" step="0.1" id="recWeight"></div>
+    <div><label>體脂率 (%)</label><input type="number" step="0.1" id="recFat"></div>
+    <div><label>骨骼肌 (kg)</label><input type="number" step="0.1" id="recMuscle"></div>
+  </div>
+  <button class="action" onclick="addBodyRecord()">新增紀錄</button>
+
+  <table>
+    <thead><tr><th>日期</th><th>體重(kg)</th><th>體脂率(%)</th><th>骨骼肌(kg)</th><th>操作</th></tr></thead>
+    <tbody id="bodyTableBody"></tbody>
+  </table>
+</div>
+
+<!-- 第二頁：訓練菜單 -->
+<div id="page2" class="page">
+  <h2>訓練菜單</h2>
+
+  <div class="timer-box">
+    <div class="timer-display" id="timerDisplay">90</div>
+    <button class="action" onclick="startRest()">開始休息 90 秒</button>
+  </div>
+
+  <div class="subtabs">
+    <div class="subtab active" onclick="showWorkout('back')">背日</div>
+    <div class="subtab" onclick="showWorkout('legs')">腿日</div>
+    <div class="subtab" onclick="showWorkout('chest')">胸+小肌群日</div>
+  </div>
+
+  <div id="workoutContainer"></div>
+</div>
+
+<!-- 第三頁：營養計畫 -->
+<div id="page3" class="page">
+  <h2>營養計畫</h2>
+
+  <div class="nutri-box">
+    <h3 style="color:#FF3B30;">訓練日</h3>
+    <p>碳水化合物：10份　|　蛋白質：17份　|　蔬菜：7-8份</p>
+    <p class="nutri-total">預估總熱量：約 1980 大卡</p>
+  </div>
+
+  <div class="nutri-box">
+    <h3 style="color:#FF3B30;">休息日</h3>
+    <p>碳水化合物：6份　|　蛋白質：15份　|　蔬菜：6-8份</p>
+    <p class="nutri-total">預估總熱量：約 1570 大卡</p>
+  </div>
+
+  <div class="nutri-box">
+    <h3 style="color:#FFD700;">份量對照表（依衛福部標準）</h3>
+    <table class="food-table">
+      <tr><th>類別</th><th>1份定義</th><th>食物範例</th></tr>
+      <tr><td>碳水化合物</td><td>15g醣類/約70大卡</td><td>白飯40g(熟)、地瓜55g、全麥吐司1片(30g)、燕麥(乾)30g、玉米半根(85g)</td></tr>
+      <tr><td>蛋白質</td><td>7g蛋白質</td><td>雞蛋1顆、雞胸肉30g(生)、鮭魚35g(生)、嫩豆腐80g、無糖豆漿190ml</td></tr>
+      <tr><td>蔬菜</td><td>100g生重/約25大卡</td><td>花椰菜、菠菜、小黃瓜、番茄、高麗菜 各100g</td></tr>
+    </table>
+  </div>
+
+  <p style="color:#ccc; font-size:13px;">白飯一碗約160克(熟)=4份碳水，可依此類推換算其他主食份量。</p>
+</div>
+
+<script>
+// ---------- 頁面切換 ----------
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+  document.querySelectorAll('.tab')[n-1].classList.add('active');
+}
+
+// ---------- 第一頁：身體數據 ----------
+let bodyData = JSON.parse(localStorage.getItem('bodyData') || 'null');
+if(!bodyData){
+  const today = new Date().toISOString().split('T')[0];
+  bodyData = [{date: today, weight:65, fat:33.3, muscle:22.9}];
+  localStorage.setItem('bodyData', JSON.stringify(bodyData));
+}
+
+function renderBodyTable(){
+  const tbody = document.getElementById('bodyTableBody');
+  tbody.innerHTML = '';
+  const sorted = [...bodyData].sort((a,b)=> new Date(b.date)-new Date(a.date));
+  sorted.forEach((rec, idx)=>{
+    const originalIdx = bodyData.indexOf(rec);
+    tbody.innerHTML += `<tr>
+      <td>${rec.date}</td><td>${rec.weight}</td><td>${rec.fat}</td><td>${rec.muscle}</td>
+      <td><button class="action" style="padding:4px 10px;font-size:12px;" onclick="deleteBodyRecord(${originalIdx})">刪除</button></td>
+    </tr>`;
+  });
+}
+
+function addBodyRecord(){
+  const date =
